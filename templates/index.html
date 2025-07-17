@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+
+{% endblock %}
+
+{% block body %}
+<div class='content'>
+    <h2 >Task Manager</h2>
+    {% if tasks|length < 1 %}
+    <h4> No tasks,create one below</h4>
+
+    {% else %}
+
+    <table>
+        <tr>
+            <th>Task</th>
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.content }}</td>
+                <td>{{ task.date_created.date() }}</td>
+                <td>
+                    <a href="/delete/{{task.id}}" id="Delete_button" >Delete  <i class="fas fa-trash-alt"></i> </a>
+                    <br>
+                    <a href="update/{{task.id}}" id="Update_button" >Update <i class="fa fa-refresh" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <form action="/" method="POST">
+        <input type="text" name="content" id="content">
+        <input type="submit" name="btn_submit" id="btn_submit" value="Add Task">
+
+    </form>
+
+</div>
+
+{% endblock %}
